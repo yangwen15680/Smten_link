@@ -293,7 +293,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
          //   self.line2View.energyTitleLabel.text = root_Today_Energy;
             //self.line2View.unitLabel.text = root_Powre;
-
+            
+            if ([_familyEnable isEqualToString:@"0"]) {
+                _dayDict=[NSMutableDictionary new];
+            }
+            
             _scrollView.contentSize=CGSizeMake(SCREEN_Width, CGRectGetMaxY(_line2View.frame)+20*NOW_SIZE);
         }
         
@@ -339,7 +343,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _value3=[NSString stringWithFormat:@"%.2fkWh",k];
     }
 
-    
+    if ([_familyEnable isEqualToString:@"0"]){
+        _value1=@"0kWh";
+        _value2=@"0kWh";
+        _value3=@"0kWh";
+    }
     
     
     
@@ -435,6 +443,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }
             
             self.line2View.deviceType=_dicType;
+            if ([_familyEnable isEqualToString:@"0"]) {
+                _dayDict=[NSMutableDictionary new];
+            }
+            
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
             [self updataUI:_dayDict];
         }
@@ -490,6 +502,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }
             }
                self.line2View.deviceType=_dicType;
+            if ([_familyEnable isEqualToString:@"0"]) {
+                _dayDict=[NSMutableDictionary new];
+            }
+            
             [self.line2View refreshBarChartViewWithDataDict:self.dayDict chartType:2];
             [self updataUI:_dayDict];
         }
@@ -545,6 +561,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }
             }
             [self.line2View refreshBarChartViewWithDataDict:_dayDict chartType:3];
+            if ([_familyEnable isEqualToString:@"0"]) {
+                _dayDict=[NSMutableDictionary new];
+            }
+            
             [self updataUI:_dayDict];
         }
         
@@ -597,6 +617,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }
             }
             [self.line2View refreshBarChartViewWithDataDict:_dayDict chartType:4];
+            if ([_familyEnable isEqualToString:@"0"]) {
+                _dayDict=[NSMutableDictionary new];
+            }
             [self updataUI:_dayDict];
         }
         

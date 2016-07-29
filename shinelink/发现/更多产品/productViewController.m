@@ -7,7 +7,7 @@
 //
 
 #import "productViewController.h"
-#import "imageBig.h"
+ #import "moreBigImage.h"
 
   #define  headH 200*HEIGHT_SIZE
 //  #define  headH2 120*HEIGHT_SIZE
@@ -210,7 +210,7 @@
 -(void)uiThree{
 
     CGRect fcRect1 = [_outline2 boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
-    
+         [_detail2 removeFromSuperview];
     _detail2=nil;
     if (!_detail2) {
         
@@ -237,12 +237,13 @@
 
 -(void)uiFour{
     
+        [_imageView removeFromSuperview];
     _imageView=nil;
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,60*HEIGHT_SIZE+headH+headH2+25*HEIGHT_SIZE, 300*NOW_SIZE,400*HEIGHT_SIZE)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,60*HEIGHT_SIZE+headH+headH2+25*HEIGHT_SIZE, 320*NOW_SIZE,320*HEIGHT_SIZE)];
         if (_paramsArray.count>0) {
             _imageView.image = _paramsArray[0];
-            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(magnifyImage)];
+            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreBigImage)];
             [self.imageView addGestureRecognizer:tap];
         }
         
@@ -251,12 +252,26 @@
      
     }
  
+    UILabel *alertLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,400*HEIGHT_SIZE+headH+headH2+15*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE)];
+    alertLable.text=@"点击图片放大";
+    //_detail.editable=NO;
+    alertLable.textAlignment=NSTextAlignmentCenter;
+    alertLable.numberOfLines=0;
+    alertLable.textColor=COLOR(60, 60, 60, 1);
+    alertLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [alertLable setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreBigImage)];
+    [alertLable addGestureRecognizer:tap1];
+    [_scrollView2 addSubview:alertLable];
+    
 }
 
-- (void)magnifyImage
-{
-    NSLog(@"局部放大");
-    [imageBig showImage:self.imageView];//调用方法
+-(void)moreBigImage{
+    
+    moreBigImage *go=[[moreBigImage alloc]init];
+    go.paramsImageArray=[NSMutableArray arrayWithArray:_paramsArray];
+    [self.navigationController pushViewController:go animated:YES];
+    
 }
 
 

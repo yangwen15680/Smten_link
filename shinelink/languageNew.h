@@ -387,9 +387,7 @@
 
 #define  root_ME_nibianqi_guzhan      NSLocalizedString(@"逆变器故障", nil)
 #define  root_ME_chunengji_guzhan      NSLocalizedString(@"储能机故障", nil)
-#define  root_ME_ruanjian_jianyi      NSLocalizedString(@"软件建议", nil)
-#define  root_ME_ruanjian_guzhan      NSLocalizedString(@"软件故障", nil)
-#define  root_ME_qita_shebei_guzhan      NSLocalizedString(@"其他设备故障", nil)
+
 #define  root_ME_qita_wenti      NSLocalizedString(@"其他问题", nil)
 
 #define  root_ME_wenti_liebiao      NSLocalizedString(@"问题列表", nil)
@@ -517,6 +515,15 @@
 
 #define  root_peizhi_chenggong        NSLocalizedString(@"配置成功", nil)
 
+#define  root_yongHuMing_mima_cuowu        NSLocalizedString(@"用户名密码错误 ", nil)
+#define  root_yongHuMing_mima_weikong        NSLocalizedString(@"用户名密码为空", nil)
+#define  root_demo     NSLocalizedString(@"示例", nil)
 
+#define  root_ME_ruanjian_jianyi      NSLocalizedString(@"监控系统问题", nil)
+#define  root_ME_ruanjian_guzhan      NSLocalizedString(@"功能建议", nil)
+#define  root_ME_qita_shebei_guzhan      NSLocalizedString(@"问题咨询", nil)
+#define  root_dadianhua     NSLocalizedString(@"拨打电话", nil)
+
+#define  root_huanSuan_danwei     NSLocalizedString(@"换算单位", nil)
 
 #endif /* languageNew_h */
