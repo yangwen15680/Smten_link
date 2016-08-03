@@ -10,7 +10,7 @@
 #import "KongZhiNi.h"
 #import "RKAlertView.h"
 
-#define AlertContent @"Growatt"
+#define AlertContent @"SMTEN"
 
 @interface kongZhiNi0 ()
 @property(nonatomic,strong)NSMutableArray *dataArray;

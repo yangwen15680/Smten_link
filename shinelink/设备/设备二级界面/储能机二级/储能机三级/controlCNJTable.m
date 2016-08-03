@@ -9,7 +9,7 @@
 #import "controlCNJTable.h"
 #import "ControlCNJ.h"
 #import "RKAlertView.h"
-#define AlertContent @"Growatt"
+#define AlertContent @"SMTEN"
 
 @interface controlCNJTable ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
