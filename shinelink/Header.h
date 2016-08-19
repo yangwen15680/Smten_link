@@ -34,6 +34,7 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define windowColor  [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]
 #define KNOTIFICATION_LOGINCHANGE                      @"loginStateChange"
+ #define Head_Url_more  @"http://cdn.growatt.com/publish"
 
  #define Demo_Name  @"guest"
  #define Demo_password  @"growattdemo"

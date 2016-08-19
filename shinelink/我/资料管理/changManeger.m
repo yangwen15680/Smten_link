@@ -7,8 +7,10 @@
 //
 
 #import "changManeger.h"
+#import "loginViewController.h"
 
 @interface changManeger ()
+@property (nonatomic, strong)UITextField *textField0;
 @property (nonatomic, strong)UITextField *textField;
 @property (nonatomic, strong)UITextField *textField1;
 @property (nonatomic, strong)UITextField *textField2;
@@ -46,6 +48,25 @@
     float Size1=40*HEIGHT_SIZE;
     
       if([_type isEqualToString:@"0"]){
+          
+          UILabel *PV0=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE-Size1, 140*NOW_SIZE,30*HEIGHT_SIZE )];
+          PV0.text=root_old_pwd;
+          PV0.textAlignment=NSTextAlignmentRight;
+          PV0.textColor=[UIColor whiteColor];
+          PV0.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+          [self.view addSubview:PV0];
+          
+          _textField0 = [[UITextField alloc] initWithFrame:CGRectMake(160*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE-Size1, 150*NOW_SIZE,30*HEIGHT_SIZE )];
+          _textField0.layer.borderWidth=1;
+          _textField0.textAlignment=NSTextAlignmentLeft;
+          _textField0.layer.cornerRadius=5;
+          _textField0.layer.borderColor=[UIColor whiteColor].CGColor;
+          _textField0.textColor = [UIColor whiteColor];
+          _textField0.tintColor = [UIColor whiteColor];
+          _textField0.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+          //_textField.delegate=self;
+          [self.view addSubview:_textField0];
+          
     UILabel *PV1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE, 140*NOW_SIZE,30*HEIGHT_SIZE )];
     PV1.text=root_Alet_user_pwd;
     PV1.textAlignment=NSTextAlignmentRight;
@@ -182,6 +203,7 @@
      [_textField2 resignFirstResponder];
      [_textField3 resignFirstResponder];
      [_textField4 resignFirstResponder];
+      [_textField0 resignFirstResponder];
 }
 
 -(void)finishSet1{
@@ -207,7 +229,7 @@
         }else{
         _address=@"/newUserAPI.do?op=updateUserPassword";
         _param1Name=@"passwordOld";
-            _param1=[_textField text];
+            _param1=[_textField0 text];
             _param2Name=@"passwordNew";
             _param2=[_textField1 text];
         }
@@ -261,7 +283,22 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                if([_type isEqualToString:@"0"]){
+                NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+                NSString *reUsername=[ud objectForKey:@"userName"];
+                
+                [[UserInfo defaultUserInfo] setUserPassword:nil];
+                
+                loginViewController *login =[[loginViewController alloc]init];
+                login.oldName=reUsername;
+                
+                [login.navigationController setNavigationBarHidden:YES];
+                [self.navigationController pushViewController:login animated:YES];
+                }else{
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             }
         }
     } failure:^(NSError *error) {

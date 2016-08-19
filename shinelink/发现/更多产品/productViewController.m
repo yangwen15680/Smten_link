@@ -9,7 +9,7 @@
 #import "productViewController.h"
  #import "moreBigImage.h"
 
-  #define  headH 200*HEIGHT_SIZE
+  #define  headH 1.212*[UIScreen mainScreen].bounds.size.width
 //  #define  headH2 120*HEIGHT_SIZE
 #define Kwidth [UIScreen mainScreen].bounds.size.width
 @interface productViewController ()<UIScrollViewDelegate>
@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIButton *monthButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property(nonatomic,strong)NSMutableArray *paramsArray;
+@property(nonatomic,strong)UILabel* alertLable;
 @end
 
 @implementation productViewController
@@ -91,7 +92,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *imageURL=[NSString stringWithFormat:@"%@/%@",HEAD_URL,_paramImage];
+        NSString *imageURL=[NSString stringWithFormat:@"%@/%@",Head_Url_more,_paramImage];
         UIImage * resultImage;
         NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
         
@@ -127,7 +128,7 @@
    
     _scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView2.scrollEnabled=YES;
-    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1000*NOW_SIZE);
+    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*NOW_SIZE);
     [self.view addSubview:_scrollView2];
     
     _title1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE+headH, 300*NOW_SIZE,25*HEIGHT_SIZE )];
@@ -159,12 +160,14 @@
 }
 
 -(void)uiTwo{
+       float buttonHead=20*HEIGHT_SIZE;
+    
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, 20*HEIGHT_SIZE);
+    self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, buttonHead);
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateNormal];
-   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateSelected];
+   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateNormal];
+   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
+   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateSelected];
     self.dayButton.tag = 1000;
     [self.dayButton setTitle:root_ME_gaisu forState:UIControlStateNormal];
    self.dayButton.selected = YES;
@@ -172,11 +175,11 @@
     [_scrollView2 addSubview:self.dayButton];
     
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.monthButton.frame = CGRectMake(1 * SCREEN_Width/2, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, 20*HEIGHT_SIZE);
+    self.monthButton.frame = CGRectMake(1 * SCREEN_Width/2, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, buttonHead);
     [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateNormal];
-   [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-[self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, 20*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateNormal];
+   [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
+[self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateSelected];
     self.monthButton.tag = 1001;
     [self.monthButton setTitle:root_ME_canshu forState:UIControlStateNormal];
     [self.monthButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,6 +195,11 @@
      
         if (_imageView) {
             [_imageView removeFromSuperview];
+             _imageView=nil;
+        }
+        if (_alertLable) {
+            [_alertLable removeFromSuperview];
+             _alertLable=nil;
         }
         
         [self uiThree];
@@ -202,8 +210,11 @@
         
         if (_detail2) {
              [_detail2 removeFromSuperview];
+                  _detail2=nil;
         }
-        [self uiFour];
+        if (_paramsArray.count>0) {
+            [self uiFour];
+        }
     }
 }
 
@@ -236,11 +247,12 @@
 }
 
 -(void)uiFour{
+     float fourHead=1.4*SCREEN_Width;
     
         [_imageView removeFromSuperview];
     _imageView=nil;
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,60*HEIGHT_SIZE+headH+headH2+25*HEIGHT_SIZE, 320*NOW_SIZE,320*HEIGHT_SIZE)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,60*HEIGHT_SIZE+headH+headH2+55*HEIGHT_SIZE, 320*NOW_SIZE,fourHead)];
         if (_paramsArray.count>0) {
             _imageView.image = _paramsArray[0];
             UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreBigImage)];
@@ -252,17 +264,25 @@
      
     }
  
-    UILabel *alertLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,400*HEIGHT_SIZE+headH+headH2+15*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE)];
-    alertLable.text=@"点击图片放大";
+  _alertLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,60*HEIGHT_SIZE+headH+headH2+25*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE)];
+    _alertLable.text=root_tupian_fangda;
     //_detail.editable=NO;
-    alertLable.textAlignment=NSTextAlignmentCenter;
-    alertLable.numberOfLines=0;
-    alertLable.textColor=COLOR(60, 60, 60, 1);
-    alertLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [alertLable setUserInteractionEnabled:YES];
+    _alertLable.textAlignment=NSTextAlignmentCenter;
+    _alertLable.numberOfLines=0;
+    _alertLable.textColor=COLOR(60, 60, 60, 1);
+    _alertLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_alertLable setUserInteractionEnabled:YES];
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreBigImage)];
-    [alertLable addGestureRecognizer:tap1];
-    [_scrollView2 addSubview:alertLable];
+    [_alertLable addGestureRecognizer:tap1];
+    [_scrollView2 addSubview:_alertLable];
+    
+}
+
+-(void)HeadBigImage{
+    
+    moreBigImage *go=[[moreBigImage alloc]init];
+    go.paramsImageArray=[NSMutableArray arrayWithArray: _imageArray];
+    [self.navigationController pushViewController:go animated:YES];
     
 }
 
@@ -285,13 +305,20 @@
     
     
     if (_imageArray) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,0,240*NOW_SIZE,_scrollerView.bounds.size.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0*NOW_SIZE,0,SCREEN_Width,_scrollerView.bounds.size.height)];
         imageView.image = _imageArray[0];
         [_scrollerView addSubview:imageView];
+        imageView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HeadBigImage)];
+        [imageView addGestureRecognizer:tap2];
+
     }else{
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,0,240*NOW_SIZE,_scrollerView.bounds.size.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0*NOW_SIZE,0,SCREEN_Width,_scrollerView.bounds.size.height)];
         imageView.image =[UIImage imageNamed:@"pic_service.png"];
         [_scrollerView addSubview:imageView];
+        imageView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HeadBigImage)];
+        [imageView addGestureRecognizer:tap2];
 
     
     }

@@ -7,10 +7,12 @@
 //
 
 #import "GetServerViewController.h"
+#import "moreBigImage.h"
 
 @interface GetServerViewController ()
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong)UIImageView  *imageBig1;
 @end
 
 @implementation GetServerViewController
@@ -99,12 +101,29 @@
         UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(50*NOW_SIZE, 10*HEIGHT_SIZE+i*240*HEIGHT_SIZE, 220*NOW_SIZE,220*HEIGHT_SIZE )];
       
         image2.image = _imageArray[i];
+        image2.userInteractionEnabled=YES;
+        image2.tag=1000+i;
+        UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreBigImage:)];
+        
+        [image2 addGestureRecognizer:tap];
+        
         [_scrollView addSubview:image2];
         
     }
     
     
 }
+
+-(void)moreBigImage:(UITapGestureRecognizer*)tap{
+    int K=tap.view.tag-1000;
+    
+    moreBigImage *go=[[moreBigImage alloc]init];
+    go.paramsImageArray=[NSMutableArray arrayWithObject:_imageArray[K]];
+    [self.navigationController pushViewController:go animated:YES];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

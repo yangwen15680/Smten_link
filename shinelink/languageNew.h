@@ -528,4 +528,16 @@
 
 #define  root_huanSuan_danwei     NSLocalizedString(@"换算单位", nil)
 
+#define  root_tupian_fangda     NSLocalizedString(@"点击图片放大", nil)
+
+#define  root_tianjia_dianzhan_chenggong     NSLocalizedString(@"添加电站成功", nil)
+#define  root_tianjia_dianzhan_chongfu     NSLocalizedString(@"当前用户下电站名重复", nil)
+#define  root_tianjia_dianzhan_chaochu     NSLocalizedString(@"超出用户限制电站数量", nil)
+#define  root_tianjia_dianzhan_guojia     NSLocalizedString(@"国家名出错", nil)
+#define  root_tianjia_dianzhan_xinxi     NSLocalizedString(@"添加信息出错", nil)
+
+#define  root_haimei_jiejue_wenti     NSLocalizedString(@"还没有解决您的问题", nil)
+#define  root_xiang_kefu_tiwen     NSLocalizedString(@"向客服提问", nil)
+#define  root_old_pwd        NSLocalizedString(@"原密码 ", nil)
+
 #endif /* languageNew_h */
