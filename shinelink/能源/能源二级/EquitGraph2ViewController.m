@@ -375,6 +375,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if (_value3Lable) {
         [_value3Lable removeFromSuperview];
     }
+    
+    if ((_valueArray.count==0)||(_valueArray.count!=3)) {
+        [_valueArray addObject:@"0"];
+        [_valueArray addObject:@"0"];
+        [_valueArray addObject:@"0"];
+    }
+    
        _value1Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 330*HEIGHT_SIZE+size1*0, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
         _value1Lable.text=_valueArray[0];
         _value1Lable.textAlignment=NSTextAlignmentCenter;

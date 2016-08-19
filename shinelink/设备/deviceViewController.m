@@ -61,6 +61,7 @@
 @property (nonatomic, strong) UIImageView *guideImageView;
 @property (nonatomic, strong) NSMutableArray *DemoPicName11;
 @property (nonatomic, strong) NSMutableArray *DemoPicName22;
+@property (nonatomic, strong) NSString *netEnable;
 @end
 
 @implementation deviceViewController
@@ -103,7 +104,12 @@
     return self;
 }
 -(void)viewDidAppear:(BOOL)animated{
-     [self netRequest];
+    
+    if ([_netEnable isEqualToString:@"1"]) {
+        [self netRequest];
+    }else{
+        _netEnable=@"1";
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netRequest) name:@"changeName" object:nil];
     
@@ -111,7 +117,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+      _netEnable=@"0";
     
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];

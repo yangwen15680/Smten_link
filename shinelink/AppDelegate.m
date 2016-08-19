@@ -103,7 +103,20 @@
                  apsForProduction:isProduction
             advertisingIdentifier:advertisingId];
     
+    //设置推送通知数量
     
+    NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotification ==nil) {
+        //1.点击icon进入应用
+    }else{
+        //2.点击消息进入应用
+        int badge =[remoteNotification[@"aps"][@"badge"] intValue];
+        badge--;
+        [JPUSHService setBadge:badge];
+        [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
+        
+    }
+
     
     return YES;
 }
@@ -173,11 +186,22 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
+    
+    int badge =[userInfo[@"aps"][@"badge"] intValue];
+    badge--;
+    [JPUSHService setBadge:badge];
+    [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
+    
 }
 
 //获取推送内容
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
    
+    int badge =[userInfo[@"aps"][@"badge"] intValue];
+    badge--;
+    [JPUSHService setBadge:badge];
+    [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
+    
     NSDateFormatter *format=[[ NSDateFormatter alloc]init];
      _messegeDic=[NSMutableDictionary new];
     
