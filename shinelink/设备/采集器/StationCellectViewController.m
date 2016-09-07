@@ -53,6 +53,10 @@
 -(void)requestData{
     [self showProgressView];
     NSString *page=[NSString stringWithFormat:@"%d",_page];
+    if(_stationId==nil){
+        _stationId=@"0";
+    }
+    
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_stationId, @"currentPage":page} paramarsSite:@"/newDatalogAPI.do?op=datalogList" sucessBlock:^(id content) {
         [self hideProgressView];
             NSLog(@"datalogList:%@",content);
@@ -255,5 +259,15 @@
         [[UIApplication sharedApplication].keyWindow addSubview:_editCellect];
     }
 }
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    //        __unsafe_unretained StationCellectViewController *myself = self;
+    //     [myself->_tableView.footer endRefreshing];
+    
+    [_tableView removeFooter];
+}
+
 
 @end

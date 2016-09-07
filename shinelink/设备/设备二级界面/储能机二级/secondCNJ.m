@@ -225,7 +225,7 @@
     leftName.textColor=[UIColor greenColor];
     leftName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:leftName];
-    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 100*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
     leftState.text=root_ri_fangdianliang;
     leftState.textAlignment=NSTextAlignmentLeft;
     leftState.textColor=[UIColor greenColor];
@@ -233,7 +233,7 @@
     [self.scrollView addSubview:leftState];
     
     
-    UILabel *rightName=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-104*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *rightName=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
     rightName.text=_totalDischarge;
     rightName.textAlignment=NSTextAlignmentRight;
     rightName.textColor=[UIColor greenColor];

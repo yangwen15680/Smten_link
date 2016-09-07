@@ -343,6 +343,7 @@
         [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
         [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
         [_plantId setObject:_stationID[index] forKey:@"plantId"];
+         _stationIdOne=_stationID[index];
         [self refreshData];
         
     }];

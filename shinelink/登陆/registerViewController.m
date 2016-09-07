@@ -95,6 +95,18 @@
 - (void)netServer
 {
    
+    NSString *countryName=[_dataDic objectForKey:@"regCountry"];
+    
+    if ([countryName isEqualToString:@"A1_中国"]) {
+        [_dataDic setObject:@"China" forKey:@"regCountry"];
+        //countryName1=@"China";
+    }
+    
+    if ([countryName containsString:@"中国"]) {
+        [_dataDic setObject:@"China" forKey:@"regCountry"];
+    }
+
+    
     //[self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"country":[_dataDic objectForKey:@"regCountry"]} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
         

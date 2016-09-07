@@ -540,4 +540,7 @@
 #define  root_xiang_kefu_tiwen     NSLocalizedString(@"向客服提问", nil)
 #define  root_old_pwd        NSLocalizedString(@"原密码 ", nil)
 
+#define  root_xuanzhe_country        NSLocalizedString(@"选择国家", nil)
+#define  root_sousuo        NSLocalizedString(@"搜索", nil)
+
 #endif /* languageNew_h */
