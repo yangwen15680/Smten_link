@@ -511,3 +511,4 @@
 
 "选择国家"="Select Country";
 "搜索"="Search";
+"服务器与所属国家不匹配"="Server address doesn‘t match with the country";

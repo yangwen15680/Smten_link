@@ -54,7 +54,7 @@
     [self setTitle:root_service];
       [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
      arrayName=@[root_ME_kefu,root_ME_zengzhi,root_ME_gengduo];
-        arrayImage=@[@"客户服务.png",@"增值服务.png",@"更多.png"];
+        arrayImage=@[@"service111.png",@"增值服务1.png",@"更多.png"];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
@@ -83,9 +83,9 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
     
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+ if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+   }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
         _languageValue=@"2";

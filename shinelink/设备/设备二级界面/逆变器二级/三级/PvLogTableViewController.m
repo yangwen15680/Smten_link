@@ -37,9 +37,9 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
     
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+ if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+    }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
         _languageValue=@"2";
@@ -99,12 +99,12 @@
                 
                 if (!_AlertView) {
                     if ([_languageValue isEqualToString:@"0"]) {
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"AlertRiZhi.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_WIDTH, 100*HEIGHT_SIZE,0.8* SCREEN_WIDTH, 0.294* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"datalog_cn2.png"];
                         [self.view addSubview:_AlertView];
                     }else{
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"AlertRiZhien.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_WIDTH, 100*HEIGHT_SIZE,0.8* SCREEN_WIDTH, 0.294* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"datalog_en2.png"];
                         [self.view addSubview:_AlertView];
                     }
                 }

@@ -16,20 +16,26 @@ static SNLocationManager * _manager = nil;
     UpdateLocationErrorBlock _errorBlock;
 }
 @property (nonatomic, strong) CLLocationManager * locationManager;//定位管理器
+@property (nonatomic, strong) UIAlertView *Alert1;
+
 @end
 @implementation SNLocationManager
 + (instancetype)shareLocationManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _manager = [[self alloc] init];
-    });
+    //    static dispatch_once_t onceToken;
+    //    dispatch_once(&onceToken, ^{
+    //        _manager = [[self alloc] init];
+    //    });
+    if (_manager) {
+        _manager=nil;
+    }
+    _manager = [[self alloc] init];
     return _manager;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _isAlwaysUse = NO;
+        _isAlwaysUse = YES;
         _isRealTime = NO;
         _distanceFilter = 1000.f;
         _desiredAccuracy = kCLLocationAccuracyKilometer;
@@ -49,16 +55,55 @@ static SNLocationManager * _manager = nil;
     _successBlock = [success copy];
     _errorBlock = [error copy];
     
-    //定位服务是否可用
-    BOOL isLocationEnabled = [CLLocationManager locationServicesEnabled];
-    if (!isLocationEnabled) {
-        NSLog(@"请打开定位服务");
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请打开定位服务，才能使用定位功能" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alertView show];
-        return;
+    
+    CLAuthorizationStatus type = [CLLocationManager authorizationStatus];
+    if (![CLLocationManager locationServicesEnabled] || type == kCLAuthorizationStatusDenied){
+        
+        
+        _Alert1 = [[UIAlertView alloc] initWithTitle:root_wei_kaiqi_dingwei message:root_tiaozhuan_jiemian_shezhi delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
+        [_Alert1 show];
+        
+        
+        
+        //        NSURL *url = [NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"];
+        //
+        //            [[UIApplication sharedApplication] openURL:url];;
+        
+        
+        
     }
+    
     self.locationManager.delegate = self;
+    
+    
+    //定位服务是否可用
+    //    BOOL isLocationEnabled = [CLLocationManager locationServicesEnabled];
+    //
+    //    if (!isLocationEnabled) {
+    //        NSLog(@"请打开定位服务");
+    //        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请打开定位服务，才能使用定位功能" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+    //        [alertView show];
+    //        return;
+    //    }
+    
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        
+    }else if (buttonIndex==1){
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        
+    }
+    
+}
+
+
+
 
 #pragma mark - 状态改变时调用
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -74,11 +119,13 @@ static SNLocationManager * _manager = nil;
                 [manager requestAlwaysAuthorization];
             }
         }
-        if (_isAlwaysUse) {
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
-                manager.allowsBackgroundLocationUpdates = YES;
-            }
-        }
+        //        if (_isAlwaysUse) {
+        //            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+        //                manager.allowsBackgroundLocationUpdates = YES;
+        //            }
+        //        }
+        [manager startUpdatingLocation];
+        
     } else {
         //精度
         manager.desiredAccuracy = _desiredAccuracy;

@@ -543,4 +543,15 @@
 #define  root_xuanzhe_country        NSLocalizedString(@"选择国家", nil)
 #define  root_sousuo        NSLocalizedString(@"搜索", nil)
 
+#define  root_fuwuqi_bu_pipei    NSLocalizedString(@"服务器与所属国家不匹配", nil)
+#define  root_wifi_peizhi    NSLocalizedString(@"ShineWiFi配置", nil)
+
+#define  root_back      NSLocalizedString(@"返回", nil)
+#define  root_stop_config      NSLocalizedString(@"停止配置", nil)
+#define root_wo_qingkong_shuju     NSLocalizedString(@"清空历史数据", nil)
+#define root_wo_qingkong_tubiao_shuliang     NSLocalizedString(@"清空APP图标标记数量", nil)
+#define  root_tuichu_zhanghu     NSLocalizedString(@"是否退出当前账户", nil)
+#define  root_wei_kaiqi_dingwei    NSLocalizedString(@"未开启定位服务", nil)
+#define  root_tiaozhuan_jiemian_shezhi    NSLocalizedString(@"是否跳转界面进行设置", nil)
+
 #endif /* languageNew_h */

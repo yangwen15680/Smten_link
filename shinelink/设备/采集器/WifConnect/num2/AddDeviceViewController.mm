@@ -189,7 +189,7 @@ static void *context = NULL;
     //    [goBut.layer setMasksToBounds:YES];
     //    [goBut.layer setCornerRadius:25.0];
     [backBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [backBut setTitle:root_finish forState:UIControlStateNormal];
+    [backBut setTitle:root_back forState:UIControlStateNormal];
     backBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:backBut];
@@ -278,34 +278,7 @@ static void *context = NULL;
     [self.pswd resignFirstResponder];
 }
 
--(void)OnSend:(unsigned int)flag SSID:(NSString*)ssidName PSWD:(NSString*)pswd{
-    const char *ssid = [ssidName cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
-    int authmode = atoi(s_authmode);
-    const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
-    unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-    
-    NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
-    if (context)
-    {
-        elianStop(context);
-        elianDestroy(context);
-        context = NULL;
-    }
-    
-    context = elianNew(NULL, 0, target, flag);
-    if (context == NULL)
-    {
-        NSLog(@"OnSend elianNew fail");
-        return;
-    }
-    
-    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-    elianStart(context);
-   
-}
+
 
 
 //开始查找设备
@@ -337,7 +310,7 @@ static void *context = NULL;
     //NSString *A2 = NSLocalizedString(@"A2", nil);
    // NSString *A3= NSLocalizedString(@"A3", nil);
      myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
-    [myAlertView addButtonWithTitle:root_cancel
+    [myAlertView addButtonWithTitle:root_stop_config
                                type:SIAlertViewButtonTypeDestructive
                             handler:^(SIAlertView *alertView) {
                                 [alertView dismissAnimated:YES];
@@ -413,6 +386,48 @@ static void *context = NULL;
 }
 
 
+-(void)OnSend:(unsigned int)flag SSID:(NSString*)ssidName PSWD:(NSString*)pswd{
+    const char *ssid = [ssidName cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
+    int authmode = atoi(s_authmode);
+    const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+    
+    NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
+    if (context)
+    {
+        
+        //////// ////////////////// ////////////////////////////////
+        //////////////////////   ////////////////////////////注销1
+      //  elianStop(context);
+     //   elianDestroy(context);
+        
+        context = NULL;
+    }
+    
+    
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销5
+  //  context = elianNew(NULL, 0, target, flag);
+    
+    
+    if (context == NULL)
+    {
+        NSLog(@"OnSend elianNew fail");
+        return;
+    }
+    
+    
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销2
+//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+//    elianStart(context);
+    
+}
+
+
 -(void)doneSearchDeviceAutoThread{
     //进行一键配置
     NSLog(@"一键配置开始");
@@ -424,6 +439,7 @@ static void *context = NULL;
         _timelineConfig = [[EasyTimeline alloc] init];
     }
     
+
     _timelineConfig.duration		= 240;
     _timelineConfig.tickPeriod	= 3;
     _timelineConfig.tickBlock		= ^void (NSTimeInterval time, EasyTimeline *timeline) {
@@ -462,8 +478,12 @@ static void *context = NULL;
 
 -(void)stopSmartConfig{
     if (context!=nil) {
-        elianStop(context);
-        elianDestroy(context);
+        
+        //////// ////////////////// ////////////////////////////////
+        //////////////////////   ////////////////////////////注销3
+//        elianStop(context);
+//        elianDestroy(context);
+        
     }
    
     context = NULL;
@@ -481,8 +501,11 @@ static void *context = NULL;
         {
             NSLog(@"查找完成");
             
-            elianStop(context);
-            elianDestroy(context);
+            //////// ////////////////// ////////////////////////////////
+            //////////////////////   ////////////////////////////注销4
+//            elianStop(context);
+//            elianDestroy(context);
+            
             context = NULL;
         }
         

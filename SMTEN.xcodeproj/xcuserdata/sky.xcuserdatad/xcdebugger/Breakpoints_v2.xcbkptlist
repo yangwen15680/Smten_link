@@ -33,54 +33,6 @@
             endingLineNumber = "380"
             landmarkName = "-finishSet1"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ControlCNJ finishSet1]"
-                  moduleName = "SMTEN"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sky/Desktop/SMTEN/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
-                  timestampString = "494932940.540679"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "380"
-                  endingLineNumber = "380"
-                  offsetFromSymbolStart = "1400">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__24-[ControlCNJ finishSet1]_block_invoke"
-                  moduleName = "SMTEN"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sky/Desktop/SMTEN/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
-                  timestampString = "494932940.540834"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "380"
-                  endingLineNumber = "380"
-                  offsetFromSymbolStart = "14">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/&#x91c7;&#x96c6;&#x5668;/StationCellectViewController.m"
-            timestampString = "494930780.832437"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-menuDidSelectAtRow:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

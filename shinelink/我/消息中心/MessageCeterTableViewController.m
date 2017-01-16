@@ -8,6 +8,7 @@
 
 #import "MessageCeterTableViewController.h"
 #import "messgeSecondViewController.h"
+#import "JPUSHService.h"
 
 @interface MessageCeterTableViewController ()<UIAlertViewDelegate>
 @property(nonatomic,strong)NSMutableArray *titleArray;
@@ -41,6 +42,8 @@
         
     }
 
+        self.tableView.frame=CGRectMake(0, 0, SCREEN_Width, SCREEN_Height-100*HEIGHT_SIZE);
+    
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_wo_qingkong_message style:UIBarButtonItemStylePlain target:self action:@selector(clearData)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
@@ -48,9 +51,15 @@
     
 }
 
+-(void)clearBadge{
+    int badge=0;
+    [JPUSHService setBadge:badge];
+    [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
+}
+
 -(void)clearData{
 
-    _Alert1 = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_wo_qingkong_lishi_shuju delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+      _Alert1 = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_wo_qingkong_lishi_shuju delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_wo_qingkong_shuju,root_wo_qingkong_tubiao_shuliang, nil];
     
     [_Alert1 show];
 }
@@ -59,13 +68,17 @@
     if (buttonIndex==0) {
         
     }else if (buttonIndex==1){
-       
-         NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+        
+        NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
         [userDefaultes setObject:nil forKey:@"MessageTitleArray"];
         [userDefaultes setObject:nil forKey:@"MessageTimeArray"];
         [userDefaultes setObject:nil forKey:@"MessageContentArray"];
+        [self.navigationController popViewControllerAnimated:NO];
+    }else if (buttonIndex==2){
+        [self clearBadge];
+        [self.navigationController popViewControllerAnimated:NO];
     }
-    [self.navigationController popViewControllerAnimated:NO];
+    
 }
 
 
@@ -102,9 +115,9 @@
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+  if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+     }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
         _languageValue=@"2";
@@ -115,12 +128,12 @@
         
         if (!_AlertView) {
             if ([_languageValue isEqualToString:@"0"]) {
-                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
-                _AlertView.image=[UIImage imageNamed:@"XiaoXiA.png"];
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"massage_cn2.png"];
                 [self.view addSubview:_AlertView];
             }else{
-                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
-                _AlertView.image=[UIImage imageNamed:@"XiaoXiAen.png"];
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"massage_en2.png"];
                 [self.view addSubview:_AlertView];
             }
         }

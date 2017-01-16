@@ -29,7 +29,8 @@
     [super viewDidLoad];
     [self addSrollView];
   //  [self addTimer];
-    
+           [self.navigationController setNavigationBarHidden:YES];
+        [self addSrollView];
     [self addBtn];
 }
 
@@ -37,7 +38,7 @@
     //初始化滚动视图
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_W, SCR_H)];
     //设置滚动视图区域
-    _scrollView.contentSize = CGSizeMake(SCR_W * 3, SCR_H);
+ _scrollView.contentSize = CGSizeMake(SCR_W * 3, 0);
     
     
     NSArray *languages = [NSLocale preferredLanguages];
@@ -45,22 +46,22 @@
     
     NSMutableArray *imageName=[NSMutableArray array];
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+ if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first2.png"];
         [imageName addObject:@"333.png"];
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
-        [imageName addObject:@"11.png"];
-         [imageName addObject:@"11.png"];
-         [imageName addObject:@"22.png"];
-         [imageName addObject:@"33.png"];
+   }else if ([currentLanguage hasPrefix:@"en"]) {
+        [imageName addObject:@"first11.png"];
+         [imageName addObject:@"first11.png"];
+         [imageName addObject:@"22EE.png"];
+         [imageName addObject:@"first33.png"];
       // NSArray *imageName=[NSArray arrayWithObjects:@"11.png",@"11.png",@"22.png",@"33.png", nil];
     }else{
-        [imageName addObject:@"11.png"];
-        [imageName addObject:@"11.png"];
-        [imageName addObject:@"22.png"];
-        [imageName addObject:@"33.png"];
+        [imageName addObject:@"first11.png"];
+        [imageName addObject:@"first11.png"];
+        [imageName addObject:@"22EE.png"];
+        [imageName addObject:@"first33.png"];
     }
 
     
@@ -95,7 +96,7 @@
     
     
     //分页控制器（小圆点－－位置）
-    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, SCR_H - 60*HEIGHT_SIZE, SCR_W, 40*HEIGHT_SIZE)];
+   _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, SCR_H - 55*HEIGHT_SIZE, SCR_W, 40*HEIGHT_SIZE)];
     _pageControl.backgroundColor = MainColor;
     //设置小圆点个数
     _pageControl.numberOfPages = 3;
@@ -131,7 +132,7 @@
 
 - (void)addBtn{
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(SCR_W * 2 + 60*NOW_SIZE,SCR_H - 100*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
+        goBut.frame=CGRectMake(SCR_W * 2 + 60*NOW_SIZE,SCR_H - 120*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
     //    [goBut.layer setMasksToBounds:YES];
     //    [goBut.layer setCornerRadius:25.0];
     [goBut setBackgroundImage:IMAGE(@"btn1.png") forState:UIControlStateNormal];
@@ -152,7 +153,7 @@
 
 - (void)clickBtn{
     loginViewController *lzqSVC = [[loginViewController alloc] init];
-                [self presentViewController:lzqSVC animated:YES completion:nil];
+                  [self.navigationController pushViewController:lzqSVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

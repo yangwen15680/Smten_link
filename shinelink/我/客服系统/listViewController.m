@@ -50,9 +50,9 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
    
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+ if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+   }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
         _languageValue=@"2";
@@ -114,7 +114,7 @@
     self.answerName=[NSMutableArray array];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=questionList" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"questionList=: %@", content);
         if(content){
@@ -124,16 +124,16 @@
                 
                 if (!_AlertView) {
                     if ([_languageValue isEqualToString:@"0"]) {
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"alertView1.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_WIDTH, 100*HEIGHT_SIZE,0.8* SCREEN_WIDTH, 0.294* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"Prompt_message_cn2.png"];
                         [self.view addSubview:_AlertView];
                     }else{
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"alertView1en.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_WIDTH, 100*HEIGHT_SIZE,0.8* SCREEN_WIDTH, 0.294* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"Prompt message_en2.png"];
                         [self.view addSubview:_AlertView];
                     }
                 }
-                
+                   [self.tableView reloadData];
             }
 
             
@@ -225,14 +225,18 @@
             [cell.coverImageView  setImage:[UIImage imageNamed:@"处理中.png"]];
         }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
             [cell.coverImageView  setImage:[UIImage imageNamed:@"已处理.png"]];
+        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"待跟进.png"]];
         }
     }else{
         if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Pend-ing.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Pending.png"]];
         }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Proce-ssing.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processing.png"]];
         }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Proce-ssed.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processed.png"]];
+        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Waiting.png"]];
         }
     
     }

@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.title=root_register;
-    [self _getPickerData];
+   
       self.dataDic = [NSMutableDictionary dictionary];
     
     UIImage *bgImage = IMAGE(@"bg.png");
@@ -109,6 +109,8 @@
     [goBut setTitle:root_next_go forState:UIControlStateNormal];
     [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
+    
+     [self _getPickerData];
 }
 
 - (void)_getPickerData

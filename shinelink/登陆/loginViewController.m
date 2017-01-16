@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSDictionary *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *demoArray;
 @property (nonatomic, strong) NSString *serverDemoAddress;
+@property (nonatomic, strong) NSString *adNumber;
 
 @end
 
@@ -52,8 +53,8 @@
     UIImage *bgImage = IMAGE(@"bg3.jpg");
     self.view.layer.contents = (id)bgImage.CGImage;
    
-   // [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
-     [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
+    // [self.navigationController setNavigationBarHidden:YES];
     
  NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
    NSString *reUsername=[ud objectForKey:@"userName"];
@@ -168,12 +169,12 @@
     
  
     if (!_forgetLable) {
-        self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+        self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     NSString *LableContent1=root_forget_pwd;
     NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
-    [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, textSize1.width, 40*HEIGHT_SIZE)];
+    [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, textSize1.width, 40*HEIGHT_SIZE)];
     
     self.forgetLable.text=root_forget_pwd;
      self.forgetLable.textColor=[UIColor whiteColor];
@@ -186,12 +187,12 @@
     
     
     if (!_registLable) {
-        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
+        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     NSString *LableContent2=root_register;
     NSDictionary *attributes2 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize2 = [LableContent2 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes2 context:nil].size;
-    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 260*HEIGHT_SIZE+sizeH, textSize2.width, 40*HEIGHT_SIZE)];
+    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 265*HEIGHT_SIZE+sizeH, textSize2.width, 40*HEIGHT_SIZE)];
     
     self.registLable.text=root_register;
     self.registLable.textColor=[UIColor whiteColor];
@@ -216,7 +217,7 @@
     
     
     
-    LoginButton *loginBtn = [[LoginButton alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 310*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
+    LoginButton *loginBtn = [[LoginButton alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 315*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
     loginBtn.backgroundColor = [UIColor colorWithRed:149/255.0f green:226/255.0f blue:98/255.0f alpha:1];
     [_scrollView addSubview:loginBtn];
     loginBtn.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -272,9 +273,9 @@ NSLog(@"体验馆");
     NSString *currentLanguage = [languages objectAtIndex:0];
     
     NSString *_languageValue;
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+  if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+   }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
         _languageValue=@"1";
@@ -336,7 +337,7 @@ NSLog(@"体验馆");
    // self.registLable.highlightedTextColor=[UIColor whiteColor];
     countryViewController *registerRoot=[[countryViewController alloc]init];
     
-    [self.navigationController pushViewController:registerRoot animated:NO];
+    [self.navigationController pushViewController:registerRoot animated:YES];
     
 
 }
@@ -421,6 +422,8 @@ NSLog(@"体验馆");
              
                 
             } else {
+                
+                    _adNumber=content[@"app_code"];
                 
                 NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
                 NSString *reUsername=[ud objectForKey:@"userName"];
@@ -567,6 +570,8 @@ NSLog(@"体验馆");
         energyVc.type=@"1";
         
         deviceViewController *deviceVc=[[deviceViewController alloc]initWithDataDict:stationID stationName:stationName];
+         deviceVc.adNumber=_adNumber;
+        
         meViewController *meVc=[[meViewController alloc]init];
          meVc.title=root_ME;
         
@@ -579,13 +584,13 @@ NSLog(@"体验馆");
         Vc3.title=root_service;
         Vc4.title=root_ME;
         Vc1.tabBarItem.image=[UIImage imageNamed:@"equipment@2x.png"];
-        Vc1.tabBarItem.selectedImage=[UIImage imageNamed:@"equipment@2x.png"];
-        Vc2.tabBarItem.image=[UIImage imageNamed:@"energy@2x.png"];
-        Vc2.tabBarItem.selectedImage=[UIImage imageNamed:@"energy@2x.png"];
+        Vc1.tabBarItem.selectedImage=[[UIImage imageNamed:@"equipmentV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        Vc2.tabBarItem.image=[UIImage imageNamed:@"energyT@2x.png"];
+       Vc2.tabBarItem.selectedImage=[[UIImage imageNamed:@"energy2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc3.tabBarItem.image=[UIImage imageNamed:@"server@2x.png"];
-        Vc3.tabBarItem.selectedImage=[UIImage imageNamed:@"server@2x.png"];
+          Vc3.tabBarItem.selectedImage=[[UIImage imageNamed:@"serverV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
-        Vc4.tabBarItem.selectedImage=[UIImage imageNamed:@"mine@2x.png"];
+       Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2v@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         //Vc1.tabBarController.tabBar.selectedImageTintColor = MainColor;
         

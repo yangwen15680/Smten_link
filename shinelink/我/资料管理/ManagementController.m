@@ -46,7 +46,7 @@
     self.dataArray =[NSMutableArray arrayWithObjects:root_WO_xiugai_mima,root_WO_xiugai_shoujihao,root_WO_xiugai_youxiang,root_WO_xiugai_dailishang,nil];
    // self.dataArray1 =[NSMutableArray arrayWithObjects:@"",@"18666666666",@"328657662@qq.com",nil];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 240*HEIGHT_SIZE)];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 300*HEIGHT_SIZE)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     self.tableView.backgroundColor=MainColor;
@@ -72,6 +72,7 @@
     [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
     //  goBut.highlighted=[UIColor grayColor];
     [self.view addSubview:registerUser];
+    
 }
 
 
@@ -129,8 +130,13 @@
     [[UserInfo defaultUserInfo] setUserName:nil];
       [[UserInfo defaultUserInfo] setServer:nil];
     loginViewController *login =[[loginViewController alloc]init];
-    login.oldName=reUsername;
-    login.oldPassword=rePassword;
+    if ([reUsername isEqualToString:@"guest"]) {
+        login.oldName=nil;
+        login.oldPassword=nil;
+    }else{
+        login.oldName=reUsername;
+        login.oldPassword=rePassword;
+    }
     
     [self initCoredata];
     

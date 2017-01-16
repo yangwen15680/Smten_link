@@ -98,7 +98,7 @@
     //[goBut.layer setMasksToBounds:YES];
     //[goBut.layer setCornerRadius:25.0];
      [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [goBut setTitle:root_OK forState:UIControlStateNormal];
+    [goBut setTitle:root_register forState:UIControlStateNormal];
      goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
@@ -182,7 +182,7 @@
                             //注册成功
                             [self succeedRegister];
                             [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
-                              [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                            //  [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                         }
                     }
                     
@@ -249,14 +249,14 @@
 
 
 -(void)addButtonPressed{
-    if ([_cellectId.text isEqual:@""]) {
-        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
-        return;
-    }
-    if ([_cellectNo.text isEqual:@""]) {
-        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
-        return;
-    }
+//    if ([_cellectId.text isEqual:@""]) {
+//        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
+//        return;
+//    }
+//    if ([_cellectNo.text isEqual:@""]) {
+//        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
+//        return;
+//    }
      [_dataDic setObject:_cellectId.text forKey:@"regDataLoggerNo"];
      [_dataDic setObject:_cellectNo.text forKey:@"regValidateCode"];
     
@@ -296,7 +296,12 @@
                          }else if ([content[@"msg"] isEqual:@"605"]){
                              
                              [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
+                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]){
+                             
+                             [self showAlertViewWithTitle:nil message:root_fuwuqi_bu_pipei cancelButtonTitle:root_Yes];
                          }
+                         
+                         
                              [self.navigationController popViewControllerAnimated:NO];
                          
                           }
@@ -346,14 +351,17 @@
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
+         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
             rootView.SnString=_cellectId.text;
         [self.navigationController pushViewController:rootView animated:YES];
     }else if (result2){
+         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else if (result3){
+        [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         
