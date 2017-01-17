@@ -35,7 +35,7 @@ typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
 @property (nonatomic) int yValueMax;
 @property (nonatomic) UIColor *strokeColor;
 @property (nonatomic) NSArray *strokeColors;
-
+@property (nonatomic) NSArray *xValues;
 
 /** Update Values. */
 - (void)updateChartData:(NSArray *)data;

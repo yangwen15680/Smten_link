@@ -553,5 +553,23 @@
 #define  root_tuichu_zhanghu     NSLocalizedString(@"是否退出当前账户", nil)
 #define  root_wei_kaiqi_dingwei    NSLocalizedString(@"未开启定位服务", nil)
 #define  root_tiaozhuan_jiemian_shezhi    NSLocalizedString(@"是否跳转界面进行设置", nil)
+#define  root_wifi_tiaozhuan_tishi    NSLocalizedString(@"wifi页面跳转提示", nil)
+#define  root_wifi_lianjie_ok    NSLocalizedString(@"wifi连接成功", nil)
+#define  root_wifi_lianjie_failed    NSLocalizedString(@"wifi连接失败", nil)
+#define  root_wifi_kandeng    NSLocalizedString(@"wifi看灯", nil)
+#define  root_wifi_chenggong_xinxi    NSLocalizedString(@"wifi提示成功信息", nil)
+#define  root_wifi_shibai_xinxi    NSLocalizedString(@"wifi提示失败信息", nil)
+#define  root_wifi_shibai_xinxi_1    NSLocalizedString(@"wifi提示失败信息1", nil)
+#define  root_wifi_shibai_xinxi_2    NSLocalizedString(@"wifi提示失败信息2", nil)
+#define  root_wifi_chongxin_peizhi    NSLocalizedString(@"wifi重新配置", nil)
+#define root_shuchu_gonglv       NSLocalizedString(@"1输出功率", nil)
+#define  root_fuwuqi_cuowu_tishi    NSLocalizedString(@"2服务器错误提示", nil)
+#define  root_fuwuqi_cuowu_tishi_2    NSLocalizedString(@"4服务器错误提示2", nil)
+
+#define  root_caijiqi_cuowu_tishi    NSLocalizedString(@"3采集器10位提示", nil)
+#define  root_zhuce_shibai      NSLocalizedString(@"5注册失败", nil)
+#define  root_shijian      NSLocalizedString(@"4时间", nil)
+#define  root_shuzhi      NSLocalizedString(@"5数据", nil)
+#define  root_riqi      NSLocalizedString(@"6日期", nil)
 
 #endif /* languageNew_h */

@@ -14,4 +14,5 @@
 @property (nonatomic, strong) NSString *oldName;
 @property (nonatomic, strong) NSString *oldPassword;
 
+@property (nonatomic, strong) NSString *LogType;
 @end

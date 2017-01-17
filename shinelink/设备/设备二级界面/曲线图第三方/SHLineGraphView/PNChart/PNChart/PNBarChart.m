@@ -14,6 +14,9 @@
 @interface PNBarChart () {
     NSMutableArray *_xChartLabels;
     NSMutableArray *_yChartLabels;
+    UIView * xDirectrix;
+    UIView * yDirectriy;
+        UILabel* xyLableValue;
 }
 
 - (UIColor *)barColorAtIndex:(NSUInteger)index;
@@ -62,6 +65,26 @@
     _showChartBorder     = NO;
     _yChartLabelWidth    = 18;
     _rotateForXAxisText  = false;
+    xDirectrix = [[UIView alloc] initWithFrame:CGRectZero];
+    xDirectrix.hidden = YES;
+    xDirectrix.backgroundColor = COLOR(232, 114, 86, 1);
+
+    xDirectrix.alpha = .5f;
+    [self addSubview:xDirectrix];
+    
+    yDirectriy = [[UIView alloc] initWithFrame:CGRectZero];
+    yDirectriy.hidden = YES;
+    yDirectriy.backgroundColor =COLOR(232, 114, 86, 1);
+
+    yDirectriy.alpha = .5f;
+    [self addSubview: yDirectriy];
+    
+    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 5*HEIGHT_SIZE, 160*NOW_SIZE, 20*HEIGHT_SIZE)];
+    xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    xyLableValue.textColor =COLOR(86, 103, 232, 1);
+    [xyLableValue setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:xyLableValue];
+    
 }
 
 - (void)setYValues:(NSArray *)yValues
@@ -353,10 +376,91 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self touchPoint:touches withEvent:event];
+    // [self touchPoint:touches withEvent:event];
+    
+    
+    
+    
     [super touchesBegan:touches withEvent:event];
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    NSInteger i = (touchPoint.x - _chartMargin)/_xLabelWidth;
+    
+    if (i<_xLabels.count) {
+        float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
+        
+        float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
+        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+        
+        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+        
+        //self.frame.size.height - _chartMargin
+        //  UIView *subview = [self hitTest:touchPoint withEvent:nil];
+        
+        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+        xDirectrix.hidden = NO;
+        [self bringSubviewToFront:xDirectrix];
+        
+        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+        NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+        xyLableValue.text=xyLableText;
+        
+    }
+    
+    
 }
 
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    // UIView *subview = [self hitTest:touchPoint withEvent:nil];
+    
+    NSInteger i = (touchPoint.x - _chartMargin)/_xLabelWidth;
+    if (i<_xLabels.count) {
+        float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
+        
+        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+        
+        float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
+        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+             NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+        xyLableValue.text=xyLableText;
+        
+    }
+    
+    
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
+    
+}
+
+-(void)delayMethod{
+    xDirectrix.hidden = YES;
+    yDirectriy.hidden = YES;
+        xyLableValue.text=nil;
+}
 
 - (void)touchPoint:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -364,10 +468,58 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self];
     UIView *subview = [self hitTest:touchPoint withEvent:nil];
-
+      xDirectrix.frame = CGRectMake(subview.frame.origin.x, 0,1, self.frame.size.height - kXLabelHeight - _chartMargin);
+  //[self getLable:subview];
+    
     if ([subview isKindOfClass:[PNBar class]] && [self.delegate respondsToSelector:@selector(userClickedOnBarAtIndex:)]) {
         [self.delegate userClickedOnBarAtIndex:subview.tag];
     }
+}
+
+-(void)getLable:(UIView*)subview{
+    
+    NSString *lableY1;
+    if (subview.tag<_yValues.count) {
+        lableY1=[NSString stringWithFormat:@"%@",_yValues[subview.tag]];
+    }
+    
+    float lableY11=[lableY1 floatValue];
+    NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+    float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+    
+    NSString *lableY=[NSString stringWithFormat:@"%.1f",lableY11];
+    float lableXX=subview.frame.origin.x;
+    float lableYY=subview.frame.origin.y;
+    float lableWW=subview.frame.size.width;
+    
+    float lableGetY1=CGRectGetMaxY(subview.frame);
+    float lableGetY=(lableGetY1-lableYY)*(maxY-lableY11)/maxY+lableYY;
+    
+    long getTag=3000+subview.tag;
+    PNChartLabel *oldLable=(PNChartLabel*)[self viewWithTag:getTag];
+    UILabel* XLable=_xChartLabels[0];
+    float xLableSize=CGRectGetMaxY(XLable.frame);
+    
+    if ((lableGetY>xLableSize)||(lableGetY*1.5<lableWW)){
+        
+    }else{
+        if (oldLable) {
+            [oldLable removeFromSuperview];
+            oldLable=nil;
+        }else{
+            PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(lableXX-10*NOW_SIZE,
+                                                                                  lableGetY-10*HEIGHT_SIZE,
+                                                                                  lableWW+20*NOW_SIZE,
+                                                                                  10*HEIGHT_SIZE)];
+            label.font = _labelFont;
+            label.textColor = _labelTextColor;
+            [label setTextAlignment:NSTextAlignmentCenter];
+            label.text = lableY;
+            label.tag=3000+subview.tag;
+            [self addSubview:label];
+        }
+    }
+    
 }
 
 

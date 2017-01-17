@@ -54,5 +54,7 @@ typedef void (^successBlock) (id content);
                  sucessBlock:(successBlock)successBlock
                      failure:(void (^)(NSError * error))failure;
 
++(void)getAppError:(NSString*)msg useName:(NSString*)useName;
+
 
 @end

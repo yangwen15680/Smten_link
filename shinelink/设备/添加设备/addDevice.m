@@ -199,6 +199,7 @@
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
                       rootView.SnString=_param2;
+                      rootView.hidesBottomBarWhenPushed=YES;
                     [self.navigationController pushViewController:rootView animated:YES];
                 }else if (result2){
                     MainViewController *rootView = [[MainViewController alloc]init];
@@ -331,6 +332,7 @@
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
                       rootView.SnString=_param2;
+                      rootView.hidesBottomBarWhenPushed=YES;
                     [self.navigationController pushViewController:rootView animated:YES];
                 }else if (result2){
                     MainViewController *rootView = [[MainViewController alloc]init];

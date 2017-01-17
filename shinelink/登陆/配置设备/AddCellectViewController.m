@@ -31,22 +31,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=root_register;
-//    UIImage *bgImage = IMAGE(@"bg.png");
-//    self.view.layer.contents = (id)bgImage.CGImage;
-   // self.title=@"配置设备";
+    self.title=root_CJQ_tianjia;
+    //    UIImage *bgImage = IMAGE(@"bg.png");
+    //    self.view.layer.contents = (id)bgImage.CGImage;
+    // self.title=@"配置设备";
     self.view.backgroundColor=MainColor;
     [self initUI];
 }
 
 -(void)buttonPressed{
     
-[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//self.navigationItem.title = @"配置设备";
+    //self.navigationItem.title = @"配置设备";
 }
 
 
@@ -69,7 +69,7 @@
     _cellectId.placeholder = root_caiJiQi;
     _cellectId.textColor = [UIColor grayColor];
     _cellectId.tintColor = [UIColor grayColor];
-     _cellectId.textAlignment = NSTextAlignmentCenter;
+    _cellectId.textAlignment = NSTextAlignmentCenter;
     [_cellectId setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_cellectId setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _cellectId.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -85,27 +85,27 @@
     _cellectNo.placeholder = root_jiaoYanMa;
     _cellectNo.textColor = [UIColor grayColor];
     _cellectNo.tintColor = [UIColor grayColor];
-     _cellectNo.textAlignment = NSTextAlignmentCenter;
+    _cellectNo.textAlignment = NSTextAlignmentCenter;
     [_cellectNo setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_cellectNo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _cellectNo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [pwdBgImageView addSubview:_cellectNo];
     
- 
+    
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(40*NOW_SIZE,200*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
     //[goBut.layer setMasksToBounds:YES];
     //[goBut.layer setCornerRadius:25.0];
-     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_register forState:UIControlStateNormal];
-     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
     
     
-    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE , 240*NOW_SIZE, 60*HEIGHT_SIZE)];
-    [QR setBackgroundImage:IMAGE(@"按钮2.png") forState:0];
+    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,180*HEIGHT_SIZE , 240*NOW_SIZE, 40*HEIGHT_SIZE)];
+    [QR setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [QR setTitle:root_erWeiMa forState:UIControlStateNormal];
     QR.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [QR setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -120,8 +120,8 @@
 }
 
 -(void)ScanQR{
-   // TempViewController *temp = [[TempViewController alloc] init];
-   // [self.navigationController pushViewController:temp animated:true];
+    // TempViewController *temp = [[TempViewController alloc] init];
+    // [self.navigationController pushViewController:temp animated:true];
     
     SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
     qrView.delegate = self;
@@ -130,7 +130,7 @@
 
 - (void)qrView:(SHBQRView *)view ScanResult:(NSString *)result {
     [view stopScan];
-  
+    
     _cellectNo.text=[self getValidCode:result];
     NSLog(@"_cellectNo.text=%@",_cellectNo.text);
     _cellectId.text=result;
@@ -173,8 +173,8 @@
                                 [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
                             }
                             
-  [self.navigationController popViewControllerAnimated:NO];
                             
+                            [self.navigationController popViewControllerAnimated:NO];
                         }
                         else {
                             
@@ -182,7 +182,7 @@
                             //注册成功
                             [self succeedRegister];
                             [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
-                            //  [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                            // [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                         }
                     }
                     
@@ -193,9 +193,8 @@
                 
                 
             }else{
-                
                 [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
-                 [self.navigationController popViewControllerAnimated:NO];
+                [self.navigationController popViewControllerAnimated:NO];
             }
         }
         
@@ -206,7 +205,7 @@
     
     [self showProgressView];
     
-  //  [self presentViewController:alert animated:true completion:nil];
+    //  [self presentViewController:alert animated:true completion:nil];
 }
 
 -(void)delButtonPressed{
@@ -218,7 +217,7 @@
         return @"";
     }
     NSData *testData = [serialNum dataUsingEncoding: NSUTF8StringEncoding];
-      int sum=0;
+    int sum=0;
     Byte *snBytes=(Byte*)[testData bytes];
     for(int i=0;i<[testData length];i++)
     {
@@ -227,13 +226,13 @@
     NSInteger B=sum%8;
     NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
     int C=sum*sum;
-   NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
+    NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
     int length = [text length];
     NSString *resultTemp;
     NSString *resultTemp3;
     NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];
-     NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
-   resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
+    NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
+    resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
     resultTemp=[resultTemp3 stringByAppendingString:B1];
     NSString *result = @"";
     char *charArray = [resultTemp cStringUsingEncoding:NSASCIIStringEncoding];
@@ -249,98 +248,124 @@
 
 
 -(void)addButtonPressed{
-//    if ([_cellectId.text isEqual:@""]) {
-//        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
-//        return;
-//    }
-//    if ([_cellectNo.text isEqual:@""]) {
-//        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
-//        return;
-//    }
-     [_dataDic setObject:_cellectId.text forKey:@"regDataLoggerNo"];
-     [_dataDic setObject:_cellectNo.text forKey:@"regValidateCode"];
+    
+    //    if ([_cellectId.text isEqual:@""]) {
+    //        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
+    //        return;
+    //    }
+    //    if ([_cellectNo.text isEqual:@""]) {
+    //        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
+    //        return;
+    //    }
+    
+    [_dataDic setObject:_cellectId.text forKey:@"regDataLoggerNo"];
+    [_dataDic setObject:_cellectNo.text forKey:@"regValidateCode"];
     
     NSDictionary *userCheck=[NSDictionary dictionaryWithObject:[_dataDic objectForKey:@"regUserName"] forKey:@"regUserName"];
- 
+    
     [self showProgressView];
- [BaseRequest requestWithMethod:HEAD_URL paramars:userCheck paramarsSite:@"/newRegisterAPI.do?op=checkUserExist" sucessBlock:^(id content) {
-     NSLog(@"checkUserExist: %@", content);
-     [self hideProgressView];
-     if (content) {
-         if ([content[@"success"] integerValue] == 0) {
-             [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=creatAccount" sucessBlock:^(id content) {
-                 NSLog(@"creatAccount: %@", content);
-                 [self hideProgressView];
-                 if (content) {
-                     if ([content[@"success"] integerValue] == 0) {
-                         //注册失败
-                         if ([content[@"msg"] isEqual:@"501"]) {
-                             [self showAlertViewWithTitle:nil message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"server error."]){
-                             
-                                 [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_Yes];
-                         }
-                         else if ([content[@"msg"] isEqual:@"602"]){
-                             
-                                 [self showAlertViewWithTitle:nil message:root_zhuCe_cuoWu cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"506"]){
-                             
-                             [self showAlertViewWithTitle:nil message:root_caijiqi_cuowu cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"error_agentCodeNotExist"]){
-                             
-                             [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
-                             
-                         }else if ([content[@"msg"] isEqual:@"604"]){
-                             
-                             [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"605"]){
-                             
-                             [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]){
-                             
-                             [self showAlertViewWithTitle:nil message:root_fuwuqi_bu_pipei cancelButtonTitle:root_Yes];
-                         }
-                         
-                         
-                             [self.navigationController popViewControllerAnimated:NO];
-                         
-                          }
-                else {
-                    _setDeviceName=content[@"datalogType"];
+    [BaseRequest requestWithMethod:HEAD_URL paramars:userCheck paramarsSite:@"/newRegisterAPI.do?op=checkUserExist" sucessBlock:^(id content) {
+        NSLog(@"checkUserExist: %@", content);
+        [self hideProgressView];
+        if (content) {
+            if ([content[@"success"] integerValue] == 0) {
+                [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=creatAccount" sucessBlock:^(id content) {
+                    NSLog(@"creatAccount: %@", content);
+                    [self hideProgressView];
                     
-                         //注册成功
-                         [self succeedRegister];
-                         [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
-                     }
-                 }
-                 
-             } failure:^(NSError *error) {
-                 [self hideProgressView];
-                 [self showToastViewWithTitle:root_Networking];
-             }];
-             
-             
-         }else{
-             [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
-               [self.navigationController popViewControllerAnimated:NO];
-         }
-}
+                    
+                    
+                    if (content) {
+                        if ([content[@"success"] integerValue] == 0) {
+                            
+                            //                         else if ([content[@"msg"] isEqual:@"server error."]){
+                            //
+                            //                             [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_Yes];
+                            //                         }
+                            //                         else if ([content[@"msg"] isEqual:@"602"]){
+                            //
+                            //                             [self showAlertViewWithTitle:nil message:root_zhuCe_cuoWu cancelButtonTitle:root_Yes];
+                            //                         }
+                            //注册失败
+                            if ([content[@"msg"] isEqual:@"501"]) {
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"506"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"503"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                                [self.navigationController popViewControllerAnimated:NO];
+                            }else if ([content[@"msg"] isEqual:@"604"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                                [self.navigationController popViewControllerAnimated:NO];
+                            }else if ([content[@"msg"] isEqual:@"605"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]){
+                                
+                                NSString *failName=[NSString stringWithFormat:@"%@(%@)",root_zhuce_shibai,content[@"msg"]];
+                                if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
+                                    
+                                    [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
+                                }else{
+                                    [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                                }
+                                
+                                [BaseRequest getAppError:failName useName:[_dataDic objectForKey:@"regUserName"]];
+                                
+                            }else if ([content[@"msg"] isEqual:@"701"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                            }else{
+                                
+                                NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];
+                                [BaseRequest getAppError:errorMsg useName:[_dataDic objectForKey:@"regUserName"]];
+                                
+                            }
+                            
+                        }
+                        else {
+                            _setDeviceName=content[@"datalogType"];
+                            
+                            //注册成功
+                            [self succeedRegister];
+                            [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
+                            
+                        }
+                    }
+                    
+                } failure:^(NSError *error) {
+                    [self hideProgressView];
+                    [self showToastViewWithTitle:root_Networking];
+                }];
+                
+                
+            }else{
+                [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:NO];
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }
      
- } failure:^(NSError *error) {
-     [self hideProgressView];
-     [self showToastViewWithTitle:root_Networking];
- }
-  
-  ];
-  
+     ];
+    
     
 }
 
 -(void)succeedRegister{
-    /*NSString *user=[_dataDic objectForKey:@"regUserName"];
+    NSString *user=[_dataDic objectForKey:@"regUserName"];
     NSString *pwd=[_dataDic objectForKey:@"regPassword"];
-    [[UserInfo defaultUserInfo] setUserPassword:user];
-    [[UserInfo defaultUserInfo] setUserName:pwd];*/
+    
+    [[UserInfo defaultUserInfo] setUserName:user];
+    [[UserInfo defaultUserInfo] setUserPassword:pwd];
+    
+    
     
     NSString *demoName1=@"ShineWIFI";           //新wifi
     NSString *demoName2=@"ShineLan";            //旧wifi
@@ -351,12 +376,14 @@
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
-         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+        
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-            rootView.SnString=_cellectId.text;
+        rootView.LogType=@"1";
+        rootView.SnString=_cellectId.text;
+        rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
     }else if (result2){
-         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+        [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         
@@ -366,15 +393,18 @@
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else{
-    
+        
+        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+        
         loginViewController *goView=[[loginViewController alloc]init];
+        goView.LogType=@"1";
         [self.navigationController pushViewController:goView animated:NO];
     }
-
     
     
     
-
+    
+    
 }
 
 

@@ -89,8 +89,14 @@
         _userTextField.text=reUsername;
         _pwdTextField=[[UITextField alloc]init];
         _pwdTextField.text=rePassword; 
-          [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
-        //添加布局
+        if ([_LogType isEqualToString:@"1"]) {
+            [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
+        }else{
+            [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
+            //添加布局
+        }
+
+    
     }
 }
 
@@ -394,7 +400,10 @@ NSLog(@"体验馆");
 }
 
 -(void)netRequest{
-
+    
+//    NSString *Username=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+//    [BaseRequest getAppError:@"test" useName:Username];
+    
     [self showProgressView];
     [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_userTextField.text, @"password":[self MD5:_pwdTextField.text]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
      [self hideProgressView];

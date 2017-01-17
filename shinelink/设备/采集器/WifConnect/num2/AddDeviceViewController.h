@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic)  NSString *SnString;
 @property(nonatomic) NSInteger cellCount0;
-
+@property (strong, nonatomic)  NSString *LogType;
 @property (strong, nonatomic)  UITextField *ipName;
 @property (strong, nonatomic)  UITextField *pswd;
 //@property (strong, nonatomic) IBOutlet UISwitch *pswdShow;

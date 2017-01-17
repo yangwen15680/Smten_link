@@ -153,6 +153,7 @@
         if (result1) {
             AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
             rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
+             rootView.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:rootView animated:YES];
         }else if (result2){
             MainViewController *rootView = [[MainViewController alloc]init];
@@ -184,6 +185,7 @@
         change.datalogSN=_arrayData[_indexPath.row][@"datalog_sn"];
         change.alias=_arrayData[_indexPath.row][@"alias"];
         change.unitId=_arrayData[_indexPath.row][@"unit_id"];
+        
         [self.navigationController pushViewController:change animated:YES];
     }
     if (row==3) {
